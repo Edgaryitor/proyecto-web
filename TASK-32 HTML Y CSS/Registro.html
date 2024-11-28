@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="css/Registro.css">
+</head>
+<body>
+
+    <!-- Logotipo en la parte superior izquierda -->
+    <div class="logo">
+        <img src="img/logo.png" alt="Logotipo">
+    </div>
+
+    <!-- Contenedor principal de registro -->
+    <div class="register-container">
+        <h2>Por favor inserta tus datos</h2>
+
+        <!-- Formulario de registro -->
+        <form action="ruta-del-servidor" method="POST">
+            <!-- Campo de nombre completo -->
+            <input type="text" name="full_name" placeholder="Nombre completo" required>
+
+            <!-- Campo de correo electrónico -->
+            <input type="email" name="email" placeholder="Correo electrónico" required>
+
+            <!-- Campo de número de teléfono -->
+            <input type="tel" name="phone" placeholder="Número de teléfono" required>
+
+            <!-- Campo de contraseña -->
+            <input type="password" name="password" placeholder="Contraseña" required>
+
+            <!-- Fecha de nacimiento (día, mes, año) -->
+            <div>
+                <select name="day" required>
+                    <option value="">Día</option>
+                    <!-- Opciones de 1 a 31 -->
+                    <script>
+                        for (let i = 1; i <= 31; i++) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+
+                <select name="month" required>
+                    <option value="">Mes</option>
+                    <option value="1">Enero</option>
+                    <option value="2">Febrero</option>
+                    <option value="3">Marzo</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Mayo</option>
+                    <option value="6">Junio</option>
+                    <option value="7">Julio</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+
+                <select name="year" required>
+                    <option value="">Año</option>
+                    <!-- Opciones de año (1920-2024) -->
+                    <script>
+                        let currentYear = new Date().getFullYear();
+                        for (let i = currentYear; i >= 1920; i--) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+            </div>
+
+            <!-- Botón de continuar -->
+            <button type="submit" class="btn-register">Continuar</button>
+        </form>
+
+        <!-- Texto de términos y condiciones -->
+        <div class="terms-text">
+            Al continuar, aceptas los <a href="docs/Términos y condiciones TASK-32.pdf">términos y condiciones</a> de TASK 32.
+        </div>
+    </div>
+
+</body>
+</html>
