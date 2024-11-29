@@ -1,59 +1,32 @@
-function mostrarVentana(idProducto) {
-    const productos = [
-        {
-            titulo: "Laptop HP 240 G9",
-            descripcion: "Laptop con procesador Intel Celeron, 8GB RAM y 256GB SSD.",
-            precio: "$5,299",
-            categoria: "Computadoras Portátiles",
-            disponibilidad: "En Stock"
-        },
-        {
-            titulo: "Laptop Dell XPS 13",
-            descripcion: "Laptop premium con Intel i7, 16GB RAM y 512GB SSD.",
-            precio: "$9,999",
-            categoria: "Computadoras Portátiles",
-            disponibilidad: "En Stock"
-        },
-        {
-            titulo: "Laptop Lenovo IdeaPad",
-            descripcion: "Laptop con Intel Core i5, 8GB RAM y 512GB SSD.",
-            precio: "$6,499",
-            categoria: "Computadoras Portátiles",
-            disponibilidad: "En Stock"
-        },
-        {
-            titulo: "Laptop Acer Aspire 5",
-            descripcion: "Laptop con AMD Ryzen 5, 8GB RAM y 256GB SSD.",
-            precio: "$5,799",
-            categoria: "Computadoras Portátiles",
-            disponibilidad: "En Stock"
-        },
-        {
-            titulo: "Laptop HP Pavilion",
-            descripcion: "Laptop con Intel i5, 8GB RAM y 1TB HDD.",
-            precio: "$7,199",
-            categoria: "Computadoras Portátiles",
-            disponibilidad: "En Stock"
-        },
-        {
-            titulo: "Laptop Dell Inspiron 15",
-            descripcion: "Laptop con Intel i3, 4GB RAM y 500GB HDD.",
-            precio: "$4,999",
-            categoria: "Computadoras Portátiles",
-            disponibilidad: "En Stock"
-        }
-    ];
+function mostrarVentana(idProducto) {  
+    // Busca el producto por su Id  
+    const producto = productos.find(p => p.Id_Producto === idProducto);  
 
-    const producto = productos[idProducto - 1];
-    document.getElementById('productoTitulo').textContent = producto.titulo;
-    document.getElementById('productoDescripcion').textContent = producto.descripcion;
-    document.getElementById('productoPrecio').textContent = producto.precio;
-    document.getElementById('productoCategoria').textContent = producto.categoria;
-    document.getElementById('productoDisponibilidad').textContent = producto.disponibilidad;
-    
-    document.getElementById('ventanaEmergente').style.display = 'flex';
-}
+    if (producto) {  
+        document.getElementById('productoTitulo').textContent = producto.Nombre_P;  
+        document.getElementById('productoDescripcion').textContent = producto.Descripción_P;  
+        document.getElementById('productoPrecio').textContent = "$" + parseFloat(producto.Precio_P).toLocaleString();  
+        document.getElementById('productoCategoria').textContent = producto.Categoría_P;  
+        document.getElementById('productoDisponibilidad').textContent = producto.Disponibilidad_P ? "En Stock" : "Agotado";  
 
-function cerrarVentana() {
-    document.getElementById('ventanaEmergente').style.display = 'none';
+        // Mostrar la imagen del producto  
+        const imgElemento = document.createElement('img');  
+        imgElemento.src = producto.Imagen_P;  
+        imgElemento.alt = producto.Nombre_P;  
+        imgElemento.style.width = "100%"; // Ajusta el tamaño según sea necesario  
+        imgElemento.style.height = "auto"; // Mantiene la proporción de la imagen  
+
+        // Limpia la ventana y añade la imagen  
+        const contenidoVentana = document.querySelector('.contenido');  
+        contenidoVentana.appendChild(imgElemento);  
+
+        document.getElementById('ventanaEmergente').style.display = 'flex';  
+    }  
+}  
+
+function cerrarVentana() {  
+    document.getElementById('ventanaEmergente').style.display = 'none';  
+    // Limpia el contenido de la ventana emergente  
+    const contenidoVentana = document.querySelector('.contenido');  
+    contenidoVentana.removeChild(contenidoVentana.lastChild); // Elimina la imagen al cerrar  
 }
