@@ -74,4 +74,19 @@ CREATE TABLE Notificación (
     FOREIGN KEY (Id_Usuario) REFERENCES Usuario(Id_Usuario)
 );
 
-select * from usuario;
+INSERT INTO Administrador (Nombre_A, Correo_e_A, Permisos_A) VALUES  
+('Administrador', 'admin@gmail.com', 'admin');
+
+INSERT INTO Producto (Nombre_P, Descripción_P, Precio_P, Categoría_P, Disponibilidad_P, Imagen_P, Id_Administrador) VALUES  
+('Laptop HP 240 G9', 'Laptop con procesador Intel Celeron, 8GB RAM y 256GB SSD.', 5299.00, 'Computadoras Portátiles', 1, 'img/Laptop HP 240 G9.jpg', 1),  
+('Laptop Dell XPS 13', 'Laptop premium con Intel i7, 16GB RAM y 512GB SSD.', 9999.00, 'Computadoras Portátiles', 1, 'img/Laptop Dell XPS 13.jpg', 1),  
+('Laptop Lenovo IdeaPad', 'Laptop con Intel Core i5, 8GB RAM y 512GB SSD.', 6499.00, 'Computadoras Portátiles', 1, 'img/Laptop Lenovo IdeaPad.jpg', 1),  
+('Laptop Acer Aspire 5', 'Laptop con AMD Ryzen 5, 8GB RAM y 256GB SSD.', 5799.00, 'Computadoras Portátiles', 1, 'img/Laptop Acer Aspire 5.jpg', 1),  
+('Laptop HP Pavilion', 'Laptop con Intel i5, 8GB RAM y 1TB HDD.', 7199.00, 'Computadoras Portátiles', 1, 'img/Laptop HP Pavilion.jpg', 1),  
+('Laptop Dell Inspiron 15', 'Laptop con Intel i3, 4GB RAM y 500GB HDD.', 4999.00, 'Computadoras Portátiles', 1, 'img/Laptop Dell Inspiron 15.jpg', 1),
+('Monitor LG UltraGear 27"', 'Monitor Gamer de 27\" con resolución QHD y tasa de refresco de 144Hz.', 7499.00, 'Monitores', 1, 'img/Monitor LG UltraGear 27.jpg', 1),
+('Mouse Logitech G502', 'Mouse gaming con sensor óptico de alta precisión y luces RGB personalizables.', 1599.00, 'Accesorios', 1, 'img/Mouse Logitech G502.jpg', 1);
+
+select * from Administrador;
+select * from Producto;
+select * from Usuario;
