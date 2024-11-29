@@ -6,7 +6,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];  
     $telefono = $_POST['phone'];  
     $contraseña = password_hash($_POST['password'], PASSWORD_BCRYPT);  
-    $fecha_nacimiento = $_POST['day'] . '-' . $_POST['month'] . '-' . $_POST['year'];  
+    
+    // Formatear la fecha de nacimiento a 'YYYY-MM-DD'
+    $fecha_nacimiento = $_POST['year'] . '-' . str_pad($_POST['month'], 2, "0", STR_PAD_LEFT) . '-' . str_pad($_POST['day'], 2, "0", STR_PAD_LEFT);  
 
     try {  
         $stmt = $conn->prepare("INSERT INTO Usuario (Nombre_U, Correo_e_U, Teléfono_U, Contraseña_U, Fecha_n_U) VALUES (?, ?, ?, ?, ?)");  
