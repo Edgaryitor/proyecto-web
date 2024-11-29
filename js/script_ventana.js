@@ -1,6 +1,6 @@
 function mostrarVentana(idProducto) {  
     // Busca el producto por su Id  
-    const producto = productos.find(p => p.Id_Producto === idProducto);  
+    const producto = producto.find(p => p.Id_Producto === idProducto);  
 
     if (producto) {  
         document.getElementById('productoTitulo').textContent = producto.Nombre_P;  
