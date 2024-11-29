@@ -8,7 +8,7 @@
     <script>
         // Función para mostrar notificaciones emergentes
         function mostrarNotificacion(mensaje) {
-            alert(mensaje); // Puedes personalizar esto con librerías como SweetAlert2
+            alert(mensaje);
         }
     </script>
 </head>

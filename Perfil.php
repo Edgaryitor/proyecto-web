@@ -22,6 +22,57 @@ if ($result->num_rows > 0) {
     exit();  
 }  
 $stmt->close();  
+
+// Manejar la actualización de datos  
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {  
+    // Obtener los datos del formulario  
+    $correo = $_POST['correo'];  
+    $telefono = $_POST['telefono'];  
+    $nueva_contraseña = $_POST['nueva_contraseña'];  
+
+    // Verificar si el correo o el teléfono ya existen en la base de datos  
+    $stmt_check = $conn->prepare("SELECT * FROM Usuario WHERE (Correo_e_U = ? OR Teléfono_U = ?) AND Id_Usuario != ?");  
+    $stmt_check->bind_param("ssi", $correo, $telefono, $user_id);  
+    $stmt_check->execute();  
+    $result_check = $stmt_check->get_result();  
+
+    $error_message = ""; // Variable para almacenar el mensaje de error  
+
+    if ($result_check->num_rows > 0) {  
+        // Comprobar si el correo ya está en uso  
+        $row = $result_check->fetch_assoc();  
+        if ($row['Correo_e_U'] === $correo) {  
+            echo "<script>alert('El correo electrónico ya están en uso.');</script>";  
+        }  
+        // Comprobar si el teléfono ya está en uso  
+        if ($row['Teléfono_U'] === $telefono) {  
+            echo "<script>alert('El número de teléfono ya están en uso.');</script>";  
+        }  
+    } else {  
+        // Actualizar los campos en la base de datos  
+        $update_stmt = $conn->prepare("UPDATE Usuario SET Correo_e_U = ?, Teléfono_U = ? WHERE Id_Usuario = ?");  
+        $update_stmt->bind_param("ssi", $correo, $telefono, $user_id);  
+
+        // Si se proporciona una nueva contraseña, actualizarla  
+        if (!empty($nueva_contraseña)) {  
+            $hashed_password = password_hash($nueva_contraseña, PASSWORD_DEFAULT); // Asegúrate de usar un hash seguro  
+            $update_stmt = $conn->prepare("UPDATE Usuario SET Correo_e_U = ?, Teléfono_U = ?, Contraseña_U = ? WHERE Id_Usuario = ?");  
+            $update_stmt->bind_param("ssss", $correo, $telefono, $hashed_password, $user_id);  
+        }  
+
+        // Ejecutar la actualización  
+        if ($update_stmt->execute()) {  
+            echo "<script>alert('Datos actualizados correctamente.');</script>";  
+        } else {  
+            echo "<script>alert('Error al actualizar los datos.');</script>";  
+        }  
+
+        $update_stmt->close();  
+    }  
+
+    $stmt_check->close();  
+}  
+
 $conn->close();  
 ?>  
 
@@ -54,26 +105,28 @@ $conn->close();
         <div class="profile-form">  
             <h2>Puedes cambiar algunos datos si lo deseas</h2>  
             
-            <label>Nombre completo <span class="note">* Imposible cambiar</span></label>  
-            <input type="text" class="readonly" value="<?php echo htmlspecialchars($user['Nombre_U']); ?>" readonly>  
+            <form action="Perfil.php" method="POST"> <!-- Asegúrate de que el formulario envíe datos a la misma página -->  
+                <label>Nombre completo <span class="note">* Imposible cambiar</span></label>  
+                <input type="text" class="readonly" value="<?php echo htmlspecialchars($user['Nombre_U']); ?>" readonly>  
 
-            <label>Correo electrónico</label>  
-            <input type="email" value="<?php echo htmlspecialchars($user['Correo_e_U']); ?>" required>  
+                <label>Correo electrónico</label>  
+                <input type="email" name="correo" value="<?php echo htmlspecialchars($user['Correo_e_U']); ?>" required>  
 
-            <label>Número de teléfono</label>  
-            <input type="tel" value="<?php echo htmlspecialchars($user['Teléfono_U']); ?>" required>  
+                <label>Número de teléfono</label>  
+                <input type="tel" name="telefono" value="<?php echo htmlspecialchars($user['Teléfono_U']); ?>" required>  
 
-            <label>Contraseña</label>  
-            <input type="password" placeholder="Escribe tu nueva contraseña" required>  
+                <label>Contraseña</label>  
+                <input type="password" name="nueva_contraseña" placeholder="Escribe tu nueva contraseña (vacío para no cambiar nada)">  
 
-            <label>Fecha de nacimiento <span class="note">* Imposible cambiar</span></label>  
-            <div style="display: flex; gap: 10px;">  
-                <input type="text" class="readonly" value="<?php echo date('d', strtotime($user['Fecha_n_U'])); ?>" readonly style="width: 60px;">  
-                <input type="text" class="readonly" value="<?php echo date('m', strtotime($user['Fecha_n_U'])); ?>" readonly style="width: 60px;">  
-                <input type="text" class="readonly" value="<?php echo date('Y', strtotime($user['Fecha_n_U'])); ?>" readonly style="width: 80px;">  
-            </div>  
+                <label>Fecha de nacimiento <span class="note">* Imposible cambiar</span></label>  
+                <div style="display: flex; gap: 10px;">  
+                    <input type="text" class="readonly" value="<?php echo date('d', strtotime($user['Fecha_n_U'])); ?>" readonly style="width: 60px;">  
+                    <input type="text" class="readonly" value="<?php echo date('m', strtotime($user['Fecha_n_U'])); ?>" readonly style="width: 60px;">  
+                    <input type="text" class="readonly" value="<?php echo date('Y', strtotime($user['Fecha_n_U'])); ?>" readonly style="width: 80px;">  
+                </div>  
 
-            <button class="confirm-btn">Confirmar</button>  
+                <button type="submit" class="confirm-btn">Confirmar</button>  
+            </form>  
         </div>  
 
         <div class="profile-photo">  
