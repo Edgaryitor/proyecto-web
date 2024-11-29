@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Catálogo de Productos</h1>
+    </header>
+    <main>
+        <section class="productos">
+            <!-- Lista de productos -->
+            <div class="producto" onclick="mostrarVentana()">
+                <img src="laptop.jpg" alt="Laptop HP">
+                <h2>Laptop HP 240 G9</h2>
+                <p class="precio">$5,299</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Ventana emergente -->
+    <div id="ventanaEmergente" class="ventana">
+        <div class="contenido">
+            <span class="cerrar" onclick="cerrarVentana()">&times;</span>
+            <img src="laptop.jpg" alt="Laptop HP">
+            <h2>Laptop HP 240 G9 plateada 14"</h2>
+            <p class="descripcion">
+                Procesador: Intel Celeron N4500 <br>
+                Capacidad: 8 GB RAM | 256 GB SSD <br>
+                Sistema operativo: Windows 11 Home <br>
+                Precio: <span class="precio">$5,299</span>
+            </p>
+            <button>Agregar al presupuesto</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
