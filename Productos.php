@@ -58,7 +58,7 @@ $conn->close(); // Cierra la conexión a la base de datos
         <a href="Información.html">Acerca de nosotros</a>  
         <a href="Productos.php">Productos</a>  
         <a href="Servicios.php">Servicios disponibles</a>  
-        <a href="Presupuesto.html">Presupuesto</a>  
+        <a href="Presupuesto.php">Presupuesto</a>  
     </nav>  
 
     <section class="productos">  
@@ -89,6 +89,6 @@ $conn->close(); // Cierra la conexión a la base de datos
     <script>  
         const productos = <?php echo json_encode($productos); ?>;  
     </script>  
-    <script src="js/script_ventana.js?v=1.0"></script>
+    <script src="js/script_ventana.js"></script>
 </body>  
 </html>
