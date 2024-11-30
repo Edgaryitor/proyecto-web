@@ -23,9 +23,9 @@ $sql = "
 ";  
 
 $stmt = $conn->prepare($sql);  
-$stmt->bind_param("i", $id_usuario); // Asegúrate de enlazar correctamente el parámetro  
+$stmt->bind_param("i", $id_usuario);  
 $stmt->execute();  
-$presupuesto = $stmt->get_result()->fetch_assoc(); // Cambia a get_result() para obtener el resultado correctamente  
+$presupuesto = $stmt->get_result()->fetch_assoc();  
 
 // Verifica si el presupuesto existe  
 if (!$presupuesto) {  
@@ -43,9 +43,9 @@ $sql_productos = "
 ";  
 
 $stmt_productos = $conn->prepare($sql_productos);  
-$stmt_productos->bind_param("i", $presupuesto['Id_Presupuesto']); // Asegúrate de enlazar correctamente el parámetro  
+$stmt_productos->bind_param("i", $presupuesto['Id_Presupuesto']);  
 $stmt_productos->execute();  
-$productos = $stmt_productos->get_result()->fetch_all(MYSQLI_ASSOC); // Cambia a get_result() para obtener todos los resultados  
+$productos = $stmt_productos->get_result()->fetch_all(MYSQLI_ASSOC);  
 
 ?>  
 
@@ -72,11 +72,13 @@ $productos = $stmt_productos->get_result()->fetch_all(MYSQLI_ASSOC); // Cambia a
         </nav>  
     </header>  
 
-    <h1>Presupuesto</h1>  
-    <div class="presupuesto">  
-        <p>Productos (<?php echo htmlspecialchars($presupuesto['Cantidad']); ?>)</p>  
-        <p>Total: $<?php echo number_format($presupuesto['Total'], 2); ?></p>  
-        
+    <div class="content">  
+        <h1>Presupuesto</h1>  
+        <div class="presupuesto-info">  
+            <p>Productos (<?php echo htmlspecialchars($presupuesto['Cantidad']); ?>)</p>  
+            <p>Total: $<?php echo number_format($presupuesto['Total'], 2); ?></p>  
+        </div>  
+
         <div class="productos-lista">  
             <?php if (empty($productos)): ?>  
                 <p>No tienes productos en tu presupuesto.</p>  
@@ -85,6 +87,7 @@ $productos = $stmt_productos->get_result()->fetch_all(MYSQLI_ASSOC); // Cambia a
                 <div class="producto">  
                     <h3><?php echo htmlspecialchars($producto['Nombre_P']); ?></h3>  
                     <p>$<?php echo number_format($producto['Precio_P'], 2); ?></p>  
+                    <button class="quitar-btn">Quitar</button>  
                 </div>  
                 <?php endforeach; ?>  
             <?php endif; ?>  

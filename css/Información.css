@@ -100,3 +100,15 @@ p {
 .link-map a:hover {  
     text-decoration: underline;  
 }  
+
+/* Logo en la parte inferior izquierda */  
+.logo-container {  
+    position: fixed; /* Posición fija */  
+    bottom: 10px; /* Distancia del fondo */  
+    left: 10px; /* Distancia de la izquierda */  
+}  
+
+.logo-container img {  
+    width: 100px; /* Ancho fijo del logo */  
+    height: auto; /* Altura automática para mantener proporciones */  
+}
