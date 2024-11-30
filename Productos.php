@@ -76,6 +76,7 @@ $conn->close(); // Cierra la conexión a la base de datos
     <div id="ventanaEmergente" class="ventana">  
         <div class="contenido">  
             <span class="cerrar" onclick="cerrarVentana()">&times;</span>  
+            <img id="productoImagen" src="" alt="" style="max-width: 100%; height: auto;">  
             <h2 id="productoTitulo"></h2>  
             <p><strong>Descripción:</strong> <span id="productoDescripcion"></span></p>  
             <p><strong>Precio:</strong> <span id="productoPrecio"></span></p>  
@@ -83,11 +84,11 @@ $conn->close(); // Cierra la conexión a la base de datos
             <p><strong>Disponibilidad:</strong> <span id="productoDisponibilidad"></span></p>  
             <button>Agregar al presupuesto</button>  
         </div>  
-    </div>  
+    </div>
 
     <script>  
         const productos = <?php echo json_encode($productos); ?>;  
     </script>  
-    <script src="js/script_ventana.js"></script>  
+    <script src="js/script_ventana.js?v=1.0"></script>
 </body>  
 </html>
