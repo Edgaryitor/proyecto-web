@@ -1,6 +1,6 @@
 <?php  
 session_start();  
-include 'funcionalidades_php/db.php'; // Asegúrate de que la ruta sea correcta  
+include 'funcionalidades_php/db.php'; 
 
 // Consulta para obtener todos los productos  
 $query = "SELECT * FROM Producto WHERE Disponibilidad_P = 1"; // Solo productos en stock  
@@ -57,7 +57,7 @@ $conn->close(); // Cierra la conexión a la base de datos
         <a href="Inicio.html">Inicio</a>  
         <a href="Información.html">Acerca de nosotros</a>  
         <a href="Productos.php">Productos</a>  
-        <a href="Servicios.html">Servicios disponibles</a>  
+        <a href="Servicios.php">Servicios disponibles</a>  
         <a href="Presupuesto.html">Presupuesto</a>  
     </nav>  
 

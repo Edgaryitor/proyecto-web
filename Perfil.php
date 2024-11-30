@@ -95,7 +95,7 @@ $conn->close();
             <a href="Inicio.html">Inicio</a>  
             <a href="Información.html">Acerca de nosotros</a>  
             <a href="Productos.php">Productos</a>  
-            <a href="Servicios.html">Servicios disponibles</a>  
+            <a href="Servicios.php">Servicios disponibles</a>  
             <a href="Presupuesto.html">Presupuesto</a>  
         </nav>  
     </header>  

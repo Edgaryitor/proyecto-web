@@ -62,6 +62,10 @@ header h1 {
     border-radius: 50%;
 }
 
+button:hover {
+    background-color: #0056b3;
+}
+
 /* Mensaje a la derecha */
 .search-bar .message {
     text-align: right;
@@ -121,11 +125,6 @@ nav a:hover {
     text-align: center;
     width: 250px; /* Ancho ajustado para acomodar el contenido */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra para los cuadros */
-}
-
-.servicio h2 {
-    font-size: 16px;
-    margin-bottom: 10px;
 }
 
 .servicio h3 {
