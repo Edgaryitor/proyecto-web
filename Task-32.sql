@@ -87,6 +87,26 @@ INSERT INTO Producto (Nombre_P, Descripción_P, Precio_P, Categoría_P, Disponib
 ('Monitor LG UltraGear 27"', 'Monitor Gamer de 27\" con resolución QHD y tasa de refresco de 144Hz.', 7499.00, 'Monitores', 1, 'img/Monitor LG UltraGear 27.jpg', 1),
 ('Mouse Logitech G502', 'Mouse gaming con sensor óptico de alta precisión y luces RGB personalizables.', 1599.00, 'Accesorios', 1, 'img/Mouse Logitech G502.jpg', 1);
 
+INSERT INTO Servicio (Nombre_S, Descripción_S, Precio_S, Categoría_S, Disponibilidad_S, Id_Administrador)  
+VALUES   
+('Reparación de hardware', 'Diagnóstico y reparación de componentes físicos dañados o defectuosos en equipos electrónicos.', 150, 'Mantenimiento', 1, 1),  
+('Reparación de software', 'Resolución de errores y problemas en sistemas operativos, aplicaciones y programas.', 100, 'Mantenimiento', 1, 1),  
+('Mantenimiento preventivo', 'Limpieza y optimización de hardware y software para garantizar un funcionamiento adecuado y prevenir fallos.', 80, 'Mantenimiento', 1, 1),  
+('Recuperación de datos', 'Recuperación de información perdida o inaccesible desde discos duros, memorias USB o sistemas dañados.', 200, 'Servicios Especializados', 1, 1),  
+('Instalación y configuración', 'Instalación de software y configuración personalizada según las necesidades del cliente.', 120, 'Instalación', 1, 1),  
+('Servicio de refrigeración líquida', 'Instalación y mantenimiento de sistemas de refrigeración líquida para mejorar el rendimiento de equipos de alto rendimiento.', 250, 'Mantenimiento', 1, 1),  
+('Servicios de overclocking', 'Ajuste de componentes para aumentar su rendimiento de manera segura mediante overclocking.', 180, 'Optimización', 1, 1),  
+('Análisis forense digital', 'Investigación y análisis de dispositivos para recopilar pruebas digitales en investigaciones legales o de ciberseguridad.', 350, 'Investigación', 1, 1),
+('Soporte técnico remoto', 'Asistencia técnica para la resolución de problemas informáticos a través de conexión remota, sin necesidad de desplazamiento.', 90, 'Soporte Técnico', 1, 1),  
+('Evaluación de seguridad cibernética', 'Análisis completo de la infraestructura de seguridad de sistemas informáticos para identificar vulnerabilidades y riesgos de seguridad.', 300, 'Seguridad', 1, 1);
+
 select * from Administrador;
-select * from Producto;
 select * from Usuario;
+select * from Producto;
+select * from Servicio;
+select * from Presupuesto;
+select * from Incluye;
+
+select * from Usuario;
+select * from Presupuesto;
+select * from Incluye;

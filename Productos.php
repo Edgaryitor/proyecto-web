@@ -2,6 +2,12 @@
 session_start();  
 include 'funcionalidades_php/db.php'; 
 
+// Verificar que el usuario esté autenticado  
+if (!isset($_SESSION['user_id'])) {  
+    header("Location: Inicio de sesión.php"); // Redirigir si no está autenticado  
+    exit();  
+}  
+
 // Consulta para obtener todos los productos  
 $query = "SELECT * FROM Producto WHERE Disponibilidad_P = 1"; // Solo productos en stock  
 $result = $conn->query($query);  
@@ -17,6 +23,7 @@ if ($result->num_rows > 0) {
 
 $conn->close(); // Cierra la conexión a la base de datos  
 ?>  
+
 
 <!DOCTYPE html>  
 <html lang="es">  
@@ -82,7 +89,7 @@ $conn->close(); // Cierra la conexión a la base de datos
             <p><strong>Precio:</strong> <span id="productoPrecio"></span></p>  
             <p><strong>Categoría:</strong> <span id="productoCategoria"></span></p>  
             <p><strong>Disponibilidad:</strong> <span id="productoDisponibilidad"></span></p>  
-            <button>Agregar al presupuesto</button>  
+            <button>Agregar al presupuesto</button>
         </div>  
     </div>
 
