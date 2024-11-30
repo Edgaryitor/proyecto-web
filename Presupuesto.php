@@ -57,6 +57,21 @@ $productos = $stmt_productos->get_result()->fetch_all(MYSQLI_ASSOC); // Cambia a
     <link rel="stylesheet" href="css/Presupuesto.css">  
 </head>  
 <body>  
+
+    <!-- Encabezado con navegación -->  
+    <header>  
+        <nav>  
+            <a href="Perfil.php" class="logo-perfil">  
+                <img src="img/icono-perfil.png" alt="Perfil">Perfil  
+            </a>  
+            <a href="Inicio.html">Inicio</a>  
+            <a href="Información.html">Acerca de nosotros</a>  
+            <a href="Productos.php">Productos</a>  
+            <a href="Servicios.php">Servicios disponibles</a>  
+            <a href="Presupuesto.php">Presupuesto</a>  
+        </nav>  
+    </header>  
+
     <h1>Presupuesto</h1>  
     <div class="presupuesto">  
         <p>Productos (<?php echo htmlspecialchars($presupuesto['Cantidad']); ?>)</p>  
@@ -75,5 +90,11 @@ $productos = $stmt_productos->get_result()->fetch_all(MYSQLI_ASSOC); // Cambia a
             <?php endif; ?>  
         </div>  
     </div>  
+
+    <!-- Logo en la esquina inferior izquierda -->  
+    <div class="logo-container">  
+        <img src="img/logo.png" alt="Logo">  
+    </div>  
+
 </body>  
 </html>
