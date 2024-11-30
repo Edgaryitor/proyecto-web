@@ -35,8 +35,10 @@ if (!$presupuesto) {
 
 // Obtener detalles de los productos en el presupuesto  
 $sql_productos = "  
-    SELECT prod.Nombre_P,   
-           prod.Precio_P  
+    SELECT prod.Id_Producto,   
+           prod.Nombre_P,   
+           prod.Precio_P,  
+           prod.Imagen_P  
     FROM Incluye inc  
     JOIN Producto prod ON inc.Id_Producto = prod.Id_Producto  
     WHERE inc.Id_Presupuesto = ?  
@@ -85,9 +87,10 @@ $productos = $stmt_productos->get_result()->fetch_all(MYSQLI_ASSOC);
             <?php else: ?>  
                 <?php foreach ($productos as $producto): ?>  
                 <div class="producto">  
+                    <img src="<?php echo htmlspecialchars($producto['Imagen_P']); ?>" alt="<?php echo htmlspecialchars($producto['Nombre_P']); ?>" style="max-width: 100px; height: auto;">  
                     <h3><?php echo htmlspecialchars($producto['Nombre_P']); ?></h3>  
                     <p>$<?php echo number_format($producto['Precio_P'], 2); ?></p>  
-                    <button class="quitar-btn">Quitar</button>  
+                    <button class="quitar-btn" onclick="eliminarDelPresupuesto(<?php echo $producto['Id_Producto']; ?>)">Quitar</button>  
                 </div>  
                 <?php endforeach; ?>  
             <?php endif; ?>  
@@ -99,5 +102,24 @@ $productos = $stmt_productos->get_result()->fetch_all(MYSQLI_ASSOC);
         <img src="img/logo.png" alt="Logo">  
     </div>  
 
+    <script>
+        function eliminarDelPresupuesto(idProducto) {
+            // Crear una solicitud AJAX para enviar los datos al servidor
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "funcionalidades_php/eliminar_presupuesto.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            // Manejar la respuesta del servidor
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert("Producto eliminado del presupuesto exitosamente!");
+                    location.reload(); // Recargar la página para actualizar la lista de productos
+                }
+            };
+
+            // Enviar los datos del producto al servidor
+            xhr.send("idProducto=" + idProducto);
+        }
+    </script>
 </body>  
 </html>
