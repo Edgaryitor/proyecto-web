@@ -101,14 +101,14 @@ p {
     text-decoration: underline;  
 }  
 
-/* Logo en la parte inferior izquierda */  
-.logo-container {  
-    position: fixed; /* Posición fija */  
-    bottom: 10px; /* Distancia del fondo */  
-    left: 10px; /* Distancia de la izquierda */  
-}  
+/* Estilos para el logo en la esquina inferior izquierda */
+.logo-container {
+    position: fixed; /* Fija el logo en una posición fija en la pantalla */
+    bottom: 10px; /* Posiciona el logo a 10px del fondo de la ventana */
+    left: 10px; /* Posiciona el logo a 10px de la izquierda de la ventana */
+}
 
-.logo-container img {  
-    width: 100px; /* Ancho fijo del logo */  
-    height: auto; /* Altura automática para mantener proporciones */  
+/* Estilos para la imagen del logo */
+.logo-container img {
+    width: 60px; /* Ancho del logo */
 }
