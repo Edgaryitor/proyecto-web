@@ -6,12 +6,21 @@ $query = $_GET['query'];
 $min_price = isset($_GET['min_price']) ? $_GET['min_price'] : 0;
 $max_price = isset($_GET['max_price']) ? $_GET['max_price'] : 999999;
 $order = isset($_GET['order']) ? $_GET['order'] : 'asc';
+$categoria = isset($_GET['categoria']) ? $_GET['categoria'] : '';
 
 // Consulta para obtener los productos que coincidan con la palabra ingresada y los filtros
-$sql = "SELECT * FROM Producto WHERE (Nombre_P LIKE ? OR Descripción_P LIKE ?) AND Precio_P BETWEEN ? AND ? ORDER BY Precio_P $order";
+$sql = "SELECT * FROM Producto WHERE (Nombre_P LIKE ? OR Descripción_P LIKE ?) AND Precio_P BETWEEN ? AND ? ";
+if ($categoria) {
+    $sql .= "AND Categoría_P = ? ";
+}
+$sql .= "ORDER BY Precio_P $order";
 $stmt = $conn->prepare($sql);
 $search_term = '%' . $query . '%';
-$stmt->bind_param("ssdd", $search_term, $search_term, $min_price, $max_price);
+if ($categoria) {
+    $stmt->bind_param("ssdds", $search_term, $search_term, $min_price, $max_price, $categoria);
+} else {
+    $stmt->bind_param("ssdd", $search_term, $search_term, $min_price, $max_price);
+}
 $stmt->execute();
 $result = $stmt->get_result();
 $productos = [];
@@ -23,6 +32,16 @@ if ($result->num_rows > 0) {
 } else {  
     echo "No se encontraron productos que coincidan con la búsqueda.";  
 }  
+
+// Obtener todas las categorías para el filtro
+$sql_categorias = "SELECT DISTINCT Categoría_P FROM Producto";
+$result_categorias = $conn->query($sql_categorias);
+$categorias = [];
+if ($result_categorias->num_rows > 0) {
+    while ($row = $result_categorias->fetch_assoc()) {
+        $categorias[] = $row['Categoría_P'];
+    }
+}
 
 $conn->close(); // Cierra la conexión a la base de datos  
 ?>  
@@ -83,6 +102,13 @@ $conn->close(); // Cierra la conexión a la base de datos
             <select name="order" id="order">
                 <option value="asc" <?php if ($order == 'asc') echo 'selected'; ?>>Ascendente</option>
                 <option value="desc" <?php if ($order == 'desc') echo 'selected'; ?>>Descendente</option>
+            </select>
+            <label for="categoria">Categoría:</label>
+            <select name="categoria" id="categoria">
+                <option value="">Todas</option>
+                <?php foreach ($categorias as $cat): ?>
+                    <option value="<?php echo htmlspecialchars($cat); ?>" <?php if ($categoria == $cat) echo 'selected'; ?>><?php echo htmlspecialchars($cat); ?></option>
+                <?php endforeach; ?>
             </select>
             <button type="submit">Aplicar filtros</button>
         </form>
