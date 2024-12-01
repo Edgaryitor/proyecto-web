@@ -23,6 +23,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt_presupuesto = $conn->prepare("INSERT INTO Presupuesto (Id_Usuario, Fecha_c_P, Total_P) VALUES (?, NOW(), 0.0)");  
         $stmt_presupuesto->bind_param("i", $id_usuario);  
         $stmt_presupuesto->execute();  
+
+        // Enviar correo de bienvenida
+        $asunto = "Bienvenido a Task-32";
+        $mensaje = "En Task-32 es un honor saber que cuentas con nosotros, bienvenido!\n\n";
+        $mensaje .= "Tus datos de registro son:\n";
+        $mensaje .= "Nombre: $nombre\n";
+        $mensaje .= "Correo electrónico: $email\n";
+        $mensaje .= "Teléfono: $telefono\n";
+        $mensaje .= "Fecha de nacimiento: $fecha_nacimiento\n";
+        $headers = "From: no-reply@tu-dominio.com\r\n";
+        mail($email, $asunto, $mensaje, $headers);
         
         // Si todo es correcto, redirigir con mensaje de éxito  
         session_start();  
