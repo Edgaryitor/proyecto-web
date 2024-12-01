@@ -43,15 +43,19 @@ $conn->close(); // Cierra la conexión a la base de datos
         </div>  
     </header>  
 
-    <div class="search-bar">  
-        <div class="search-container">  
-            <input type="text" placeholder="¿Buscas algo en específico?">  
-            <button><img src="img/lupa.png" alt="Buscar" width="20"></button>  
-        </div>  
-        <div class="message">  
-            <p>"Calidad y seguridad al mejor precio"</p>  
-        </div>  
-    </div>  
+    <div class="search-bar">
+        <div class="search-container">
+            <form action="resultados_busqueda.php" method="GET">
+                <input type="text" name="query" placeholder="¿Buscas algo en específico?">
+                <button type="submit">
+                    <img src="img/lupa.png" alt="Buscar" width="20">
+                </button> 
+            </form>
+        </div>
+        <div class="message">
+            <p>"Calidad y seguridad al mejor precio"</p>
+        </div>
+    </div>
     
     <div class="linea-separadora"></div>  
 

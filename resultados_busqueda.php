@@ -1,61 +1,57 @@
 <?php  
-session_start();  
 include 'funcionalidades_php/db.php'; 
 
-// Verificar que el usuario esté autenticado  
-if (!isset($_SESSION['user_id'])) {  
-    header("Location: Inicio de sesión.php"); // Redirigir si no está autenticado  
-    exit();  
-}  
+// Obtener la consulta de búsqueda
+$query = $_GET['query'];
 
-// Consulta para obtener todos los productos  
-$query = "SELECT * FROM Producto WHERE Disponibilidad_P = 1"; // Solo productos en stock  
-$result = $conn->query($query);  
-$productos = [];  
+// Consulta para obtener los productos que coincidan con la palabra ingresada
+$sql = "SELECT * FROM Producto WHERE Nombre_P LIKE ? OR Descripción_P LIKE ?";
+$stmt = $conn->prepare($sql);
+$search_term = '%' . $query . '%';
+$stmt->bind_param("ss", $search_term, $search_term);
+$stmt->execute();
+$result = $stmt->get_result();
+$productos = [];
 
 if ($result->num_rows > 0) {  
     while ($row = $result->fetch_assoc()) {  
         $productos[] = $row; // Almacena cada producto en el array  
     }  
 } else {  
-    echo "No hay productos disponibles.";  
+    echo "No se encontraron productos que coincidan con la búsqueda.";  
 }  
 
 $conn->close(); // Cierra la conexión a la base de datos  
 ?>  
-
 
 <!DOCTYPE html>  
 <html lang="es">  
 <head>  
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>Catálogo de productos</title>  
-    <link rel="stylesheet" href="css/Productos.css">  
+    <title>Resultados de Búsqueda</title>  
+    <link rel="stylesheet" href="css/ResultadosBusqueda.css">  
 </head>  
 <body>  
     <!-- Encabezado con logotipo y barra de búsqueda -->  
     <header>  
-        <h1>Prepárate para Navidad este 2024</h1>  
-        <marquee width="100" scrollamount="10">JO JO JO!</marquee>  
+        <h1>Resultados de Búsqueda</h1>  
         <div class="logo">  
             <img src="img/logo.png" alt="Logotipo">  
         </div>  
     </header>  
 
-    <div class="search-bar">
-        <div class="search-container">
+    <div class="search-bar">  
+        <div class="search-container">  
             <form action="resultados_busqueda.php" method="GET">
-                <input type="text" name="query" placeholder="¿Buscas algo en específico?">
-                <button type="submit">
-                    <img src="img/lupa.png" alt="Buscar" width="20">
-                </button> 
+                <input type="text" name="query" placeholder="¿Buscas algo en específico?" value="<?php echo htmlspecialchars($query); ?>">
+                <button type="submit"><img src="img/lupa.png" alt="Buscar" width="20"></button>
             </form>
-        </div>
-        <div class="message">
-            <p>"Calidad y seguridad al mejor precio"</p>
-        </div>
-    </div>
+        </div>  
+        <div class="message">  
+            <p>"Calidad y seguridad al mejor precio"</p>  
+        </div>  
+    </div>  
     
     <div class="linea-separadora"></div>  
 
@@ -73,14 +69,18 @@ $conn->close(); // Cierra la conexión a la base de datos
     </nav>  
 
     <section class="productos">  
-        <?php foreach ($productos as $producto): ?>  
-        <div class="producto">  
-            <img src="<?php echo htmlspecialchars($producto['Imagen_P']); ?>" alt="<?php echo htmlspecialchars($producto['Nombre_P']); ?>">  
-            <h2><?php echo htmlspecialchars($producto['Nombre_P']); ?></h2>  
-            <p><strong>Precio:</strong> $<?php echo number_format($producto['Precio_P'], 2); ?></p>   
-            <button onclick="mostrarVentana(<?php echo $producto['Id_Producto']; ?>)">Ver más</button>  
-        </div>  
-        <?php endforeach; ?>  
+        <?php if (empty($productos)): ?>  
+            <p>No se encontraron productos que coincidan con la búsqueda.</p>  
+        <?php else: ?>  
+            <?php foreach ($productos as $producto): ?>  
+            <div class="producto">  
+                <img src="<?php echo htmlspecialchars($producto['Imagen_P']); ?>" alt="<?php echo htmlspecialchars($producto['Nombre_P']); ?>">  
+                <h2><?php echo htmlspecialchars($producto['Nombre_P']); ?></h2>  
+                <p><strong>Precio:</strong> $<?php echo number_format($producto['Precio_P'], 2); ?></p>   
+                <button onclick="mostrarVentana(<?php echo $producto['Id_Producto']; ?>)">Ver más</button>  
+            </div>  
+            <?php endforeach; ?>  
+        <?php endif; ?>  
     </section>  
 
     <!-- Ventana emergente -->  
