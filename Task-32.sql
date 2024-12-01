@@ -13,7 +13,6 @@ CREATE TABLE Usuario (
 );
 ALTER TABLE Usuario ADD COLUMN Foto_U VARCHAR(255) DEFAULT 'img/default_profile.png';
 
-
 -- Tabla: Administrador
 CREATE TABLE Administrador (
     Id_Administrador INT AUTO_INCREMENT PRIMARY KEY,
@@ -65,17 +64,6 @@ CREATE TABLE Incluye (
     FOREIGN KEY (Id_Presupuesto) REFERENCES Presupuesto(Id_Presupuesto),
     FOREIGN KEY (Id_Producto) REFERENCES Producto(Id_Producto)
 );
-
--- Tabla: Notificación
-CREATE TABLE Notificación (
-    Id_Notificación INT AUTO_INCREMENT PRIMARY KEY,
-    Fecha_e_N DATETIME NOT NULL,
-    Tipo_N VARCHAR(50) NOT NULL,
-    Descripción_N TEXT NOT NULL,
-    Id_Usuario INT NOT NULL,
-    FOREIGN KEY (Id_Usuario) REFERENCES Usuario(Id_Usuario)
-);
-
 INSERT INTO Administrador (Nombre_A, Correo_e_A, Permisos_A) VALUES  
 ('Administrador', 'admin@gmail.com', 'admin');
 
