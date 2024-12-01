@@ -174,3 +174,45 @@ button:hover {
     color: black;
     font-weight: bold;
 }
+
+/* Estilos para la sección de filtros */
+.filtros {
+    background-color: #f4f4f4; /* Color de fondo para la sección de filtros */
+    padding: 20px; /* Espaciado interno para la sección de filtros */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra para la sección de filtros */
+    margin: 20px auto; /* Margen superior e inferior para separar la sección de filtros */
+    max-width: 1200px; /* Ancho máximo del contenedor */
+    display: flex; /* Utiliza flexbox para alinear los elementos dentro */
+    justify-content: space-between; /* Espacia los elementos en el contenedor */
+    align-items: center; /* Alinea los elementos verticalmente al centro */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en múltiples líneas */
+    gap: 10px; /* Espaciado entre los elementos */
+}
+
+.filtros label {
+    font-weight: bold; /* Hace que las etiquetas tengan un peso de fuente más alto */
+    margin-right: 10px; /* Margen derecho para separar las etiquetas de los inputs */
+}
+
+.filtros input[type="number"],
+.filtros select {
+    padding: 10px; /* Espaciado interno para los inputs y selects */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #ccc; /* Borde gris claro */
+    width: 150px; /* Ancho fijo para los inputs y selects */
+}
+
+.filtros button {
+    background-color: #0078d7; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    border: none; /* Elimina el borde del botón */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    font-size: 14px; /* Tamaño de la fuente del botón */
+}
+
+.filtros button:hover {
+    background-color: #005bb5; /* Cambia el color de fondo al pasar el cursor */
+}

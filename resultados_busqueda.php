@@ -1,14 +1,17 @@
 <?php  
 include 'funcionalidades_php/db.php'; 
 
-// Obtener la consulta de búsqueda
+// Obtener la consulta de búsqueda y los filtros
 $query = $_GET['query'];
+$min_price = isset($_GET['min_price']) ? $_GET['min_price'] : 0;
+$max_price = isset($_GET['max_price']) ? $_GET['max_price'] : 999999;
+$order = isset($_GET['order']) ? $_GET['order'] : 'asc';
 
-// Consulta para obtener los productos que coincidan con la palabra ingresada
-$sql = "SELECT * FROM Producto WHERE Nombre_P LIKE ? OR Descripción_P LIKE ?";
+// Consulta para obtener los productos que coincidan con la palabra ingresada y los filtros
+$sql = "SELECT * FROM Producto WHERE (Nombre_P LIKE ? OR Descripción_P LIKE ?) AND Precio_P BETWEEN ? AND ? ORDER BY Precio_P $order";
 $stmt = $conn->prepare($sql);
 $search_term = '%' . $query . '%';
-$stmt->bind_param("ss", $search_term, $search_term);
+$stmt->bind_param("ssdd", $search_term, $search_term, $min_price, $max_price);
 $stmt->execute();
 $result = $stmt->get_result();
 $productos = [];
@@ -67,6 +70,23 @@ $conn->close(); // Cierra la conexión a la base de datos
         <a href="Servicios.php">Servicios disponibles</a>  
         <a href="Presupuesto.php">Presupuesto</a>  
     </nav>  
+
+    <!-- Filtros de búsqueda -->
+    <div class="filtros">
+        <form action="resultados_busqueda.php" method="GET">
+            <input type="hidden" name="query" value="<?php echo htmlspecialchars($query); ?>">
+            <label for="min_price">Precio mínimo:</label>
+            <input type="number" name="min_price" id="min_price" value="<?php echo htmlspecialchars($min_price); ?>">
+            <label for="max_price">Precio máximo:</label>
+            <input type="number" name="max_price" id="max_price" value="<?php echo htmlspecialchars($max_price); ?>">
+            <label for="order">Ordenar por precio:</label>
+            <select name="order" id="order">
+                <option value="asc" <?php if ($order == 'asc') echo 'selected'; ?>>Ascendente</option>
+                <option value="desc" <?php if ($order == 'desc') echo 'selected'; ?>>Descendente</option>
+            </select>
+            <button type="submit">Aplicar filtros</button>
+        </form>
+    </div>
 
     <section class="productos">  
         <?php if (empty($productos)): ?>  
