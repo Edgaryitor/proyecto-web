@@ -49,6 +49,7 @@ $stmt_productos->bind_param("i", $presupuesto['Id_Presupuesto']);
 $stmt_productos->execute();  
 $productos = $stmt_productos->get_result()->fetch_all(MYSQLI_ASSOC);  
 
+$conn->close(); // Cierra la conexión a la base de datos
 ?>  
 
 <!DOCTYPE html>  
@@ -95,6 +96,8 @@ $productos = $stmt_productos->get_result()->fetch_all(MYSQLI_ASSOC);
                 <?php endforeach; ?>  
             <?php endif; ?>  
         </div>  
+
+        <button class="guardar-btn" onclick="guardarPresupuesto()">Guardar presupuesto</button>
     </div>  
 
     <!-- Logo en la esquina inferior izquierda -->  
@@ -119,6 +122,23 @@ $productos = $stmt_productos->get_result()->fetch_all(MYSQLI_ASSOC);
 
             // Enviar los datos del producto al servidor
             xhr.send("idProducto=" + idProducto);
+        }
+
+        function guardarPresupuesto() {
+            // Crear una solicitud AJAX para enviar los datos al servidor
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "funcionalidades_php/guardar_presupuesto.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            // Manejar la respuesta del servidor
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert("Presupuesto guardado y notificación enviada!");
+                }
+            };
+
+            // Enviar la solicitud al servidor
+            xhr.send();
         }
     </script>
 </body>  
