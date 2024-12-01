@@ -111,3 +111,23 @@ nav a:hover {
 .logo-container img {
     width: 60px; /* Ancho del logo */
 }
+
+/* Estilos para el botón de guardar presupuesto */
+.guardar-btn {
+    background-color: #28a745; /* Color de fondo verde */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    border: none; /* Elimina el borde del botón */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    font-size: 16px; /* Tamaño de la fuente del botón */
+    margin-top: 20px; /* Margen superior para separar el botón del contenido anterior */
+    display: block; /* Muestra el botón como un bloque */
+    width: 100%; /* Hace que el botón ocupe todo el ancho disponible */
+    text-align: center; /* Centra el texto dentro del botón */
+}
+
+/* Efecto hover para el botón de guardar presupuesto */
+.guardar-btn:hover {
+    background-color: #218838; /* Cambia el color de fondo al pasar el cursor */
+}
