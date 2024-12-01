@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'db.php'; // Incluye el archivo de conexión a la base de datos
+include 'correo.php'; // Incluye el archivo de envío de correos
 
 // Verificar que el usuario esté autenticado
 if (!isset($_SESSION['user_id'])) {
@@ -60,8 +61,7 @@ foreach ($detalles as $detalle) {
 
 // Enviar el correo
 $asunto = "Detalles de tu presupuesto";
-$headers = "From: no-reply@tu-dominio.com\r\n";
-mail($correo_usuario, $asunto, $contenido_correo, $headers);
+enviarCorreo($correo_usuario, $asunto, $contenido_correo);
 
 echo "Presupuesto guardado y notificación enviada!";
 ?>

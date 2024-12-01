@@ -1,5 +1,6 @@
 <?php
 include 'db.php';
+include 'correo.php'; // Incluye el archivo de envío de correos
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST['full_name'];
@@ -32,8 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mensaje .= "Correo electrónico: $email\n";
         $mensaje .= "Teléfono: $telefono\n";
         $mensaje .= "Fecha de nacimiento: $fecha_nacimiento\n";
-        $headers = "From: no-reply@tu-dominio.com\r\n";
-        mail($email, $asunto, $mensaje, $headers);
+        enviarCorreo($email, $asunto, $mensaje);
 
         // Si todo es correcto, redirigir con mensaje de éxito  
         session_start();
