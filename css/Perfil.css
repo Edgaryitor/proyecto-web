@@ -97,18 +97,20 @@ nav a:hover {
     width: 180px; /* Ancho de la imagen de perfil */
     height: 180px; /* Alto de la imagen de perfil */
     border-radius: 50%; /* Hace que la imagen tenga forma circular */
-    margin-bottom: 40px; /* Margen inferior para separar la imagen del botón */
-    display: flex; /* Utiliza flexbox para alinear los elementos dentro */
+    margin-bottom: 10px; /* Margen inferior para separar la imagen del botón */
+    display: block; /* Muestra la imagen como un bloque */
 }
 
 /* Estilos para el botón de cambiar foto */
-.profile-photo button {
+.change-photo-btn {
     background-color: #0078d7; /* Color de fondo del botón */
     border: none; /* Elimina el borde del botón */
     padding: 8px 15px; /* Espaciado interno del botón */
     color: white; /* Color del texto del botón */
     border-radius: 5px; /* Bordes redondeados del botón */
     cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    display: block; /* Muestra el botón como un bloque */
+    margin: 10px auto; /* Centra el botón horizontalmente y agrega margen superior */
 }
 
 /* Estilos del botón de confirmación */

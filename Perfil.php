@@ -49,6 +49,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<script>alert('El número de teléfono ya están en uso.');</script>";  
         }  
     } else {  
+        // Manejar la carga de la foto de perfil
+        if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK) {
+            $foto_tmp = $_FILES['foto_perfil']['tmp_name'];
+            $foto_nombre = $user_id . '.' . pathinfo($_FILES['foto_perfil']['name'], PATHINFO_EXTENSION);
+            $foto_destino = 'uploads/' . $foto_nombre;
+
+            // Eliminar la foto anterior si existe
+            if (file_exists($user['Foto_U']) && $user['Foto_U'] !== 'img/default_profile.png') {
+                unlink($user['Foto_U']);
+            }
+
+            // Mover el archivo subido a la carpeta de destino
+            if (move_uploaded_file($foto_tmp, $foto_destino)) {
+                // Actualizar la ruta de la foto en la base de datos
+                $update_stmt = $conn->prepare("UPDATE Usuario SET Foto_U = ? WHERE Id_Usuario = ?");
+                $update_stmt->bind_param("si", $foto_destino, $user_id);
+                $update_stmt->execute();
+                $update_stmt->close();
+            } else {
+                echo "<script>alert('Error al subir la foto de perfil.');</script>";
+            }
+        }
+
         // Actualizar los campos en la base de datos  
         $update_stmt = $conn->prepare("UPDATE Usuario SET Correo_e_U = ?, Teléfono_U = ? WHERE Id_Usuario = ?");  
         $update_stmt->bind_param("ssi", $correo, $telefono, $user_id);  
@@ -62,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Ejecutar la actualización  
         if ($update_stmt->execute()) {  
-            echo "<script>alert('Datos actualizados correctamente.');</script>";  
+            echo "<script>alert('Datos actualizados correctamente.'); window.location.href = 'Perfil.php';</script>";  
         } else {  
             echo "<script>alert('Error al actualizar los datos.');</script>";  
         }  
@@ -105,7 +128,7 @@ $conn->close();
         <div class="profile-form">  
             <h2>Puedes cambiar algunos datos si lo deseas</h2>  
             
-            <form action="Perfil.php" method="POST"> <!-- Asegúrate de que el formulario envíe datos a la misma página -->  
+            <form action="Perfil.php" method="POST" enctype="multipart/form-data"> <!-- Asegúrate de que el formulario permita la carga de archivos -->  
                 <label>Nombre completo <span class="note">* Imposible cambiar</span></label>  
                 <input type="text" class="readonly" value="<?php echo htmlspecialchars($user['Nombre_U']); ?>" readonly>  
 
@@ -125,15 +148,17 @@ $conn->close();
                     <input type="text" class="readonly" value="<?php echo date('Y', strtotime($user['Fecha_n_U'])); ?>" readonly style="width: 80px;">  
                 </div>  
 
+                <input type="file" id="foto_perfil" name="foto_perfil" accept="image/*" style="display: none;">
                 <button type="submit" class="confirm-btn">Confirmar</button>  
             </form>  
         </div>  
 
         <div class="profile-photo">  
-            <img src="img/foto" alt="Foto de perfil">  
-            <button>Cambiar foto</button>  
+            <label>Foto de perfil</label>
+            <img src="<?php echo htmlspecialchars($user['Foto_U']); ?>" alt="Foto de perfil">  
+            <button type="button" class="change-photo-btn" onclick="document.getElementById('foto_perfil').click();">Cambiar foto</button>
         </div>  
-    </div>  
+    </div>
 
     <!-- Logo en la esquina inferior izquierda -->  
     <div class="logo-container">  
