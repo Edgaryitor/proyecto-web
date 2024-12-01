@@ -11,6 +11,8 @@ CREATE TABLE Usuario (
     Fecha_n_U DATE NOT NULL,
     Contraseña_U VARCHAR(255) NOT NULL
 );
+ALTER TABLE Usuario ADD COLUMN Foto_U VARCHAR(255) DEFAULT 'img/default_profile.png';
+
 
 -- Tabla: Administrador
 CREATE TABLE Administrador (
@@ -85,10 +87,19 @@ INSERT INTO Producto (Nombre_P, Descripción_P, Precio_P, Categoría_P, Disponib
 ('Laptop HP Pavilion', 'Laptop con Intel i5, 8GB RAM y 1TB HDD.', 7199.00, 'Computadoras Portátiles', 1, 'img/Laptop HP Pavilion.jpg', 1),  
 ('Laptop Dell Inspiron 15', 'Laptop con Intel i3, 4GB RAM y 500GB HDD.', 4999.00, 'Computadoras Portátiles', 1, 'img/Laptop Dell Inspiron 15.jpg', 1),
 ('Monitor LG UltraGear 27"', 'Monitor Gamer de 27\" con resolución QHD y tasa de refresco de 144Hz.', 7499.00, 'Monitores', 1, 'img/Monitor LG UltraGear 27.jpg', 1),
-('Mouse Logitech G502', 'Mouse gaming con sensor óptico de alta precisión y luces RGB personalizables.', 1599.00, 'Accesorios', 1, 'img/Mouse Logitech G502.jpg', 1);
+('Mouse Logitech G502', 'Mouse gaming con sensor óptico de alta precisión y luces RGB personalizables.', 1599.00, 'Accesorios', 1, 'img/Mouse Logitech G502.jpg', 1),
+('Teclado Mecánico Corsair K70', 'Teclado mecánico RGB con switches Cherry MX y marco de aluminio.', 2999.00, 'Accesorios', 1, 'img/Teclado Corsair K70.jpg', 1),  
+('Audífonos HyperX Cloud II', 'Audífonos gamer con sonido envolvente 7.1 y almohadillas cómodas.', 1899.00, 'Accesorios', 1, 'img/Audífonos HyperX Cloud II.jpg', 1),  
+('Cámara Web Logitech C920', 'Cámara web HD con micrófono integrado, ideal para videoconferencias.', 1499.00, 'Cámaras', 1, 'img/Cámara Logitech C920.jpg', 1),  
+('SSD Samsung 970 EVO Plus 1TB', 'Unidad de almacenamiento SSD NVMe de alta velocidad con 1TB de capacidad.', 3599.00, 'Almacenamiento', 1, 'img/SSD Samsung 970 EVO Plus 1TB.jpg', 1),  
+('Tarjeta Gráfica NVIDIA RTX 3060', 'Tarjeta gráfica con 12GB GDDR6, ideal para gaming y diseño gráfico.', 8499.00, 'Componentes', 1, 'img/Tarjeta Gráfica NVIDIA RTX 3060.jpg', 1),  
+('Router TP-Link Archer AX50', 'Router WiFi 6 dual band con velocidad de hasta 3 Gbps.', 2699.00, 'Redes', 1, 'img/Router TP-Link Archer AX50.jpg', 1),  
+('Impresora HP DeskJet 4155e', 'Impresora multifuncional inalámbrica con impresión a color y escáner.', 2499.00, 'Impresoras', 1, 'img/Impresora HP DeskJet 4155e.jpg', 1),  
+('Tablet Samsung Galaxy Tab A7', 'Tablet de 10.4" con 64GB de almacenamiento y WiFi.', 3999.00, 'Tablets', 1, 'img/Tablet Samsung Galaxy Tab A7.jpg', 1),  
+('Silla Gamer Razer Iskur', 'Silla ergonómica con diseño gamer y soporte lumbar ajustable.', 8999.00, 'Mobiliario', 1, 'img/Silla Gamer Razer Iskur.jpg', 1),  
+('Fuente de Poder Corsair RM750', 'Fuente de alimentación modular de 750W con certificación 80+ Gold.', 1999.00, 'Componentes', 1, 'img/Fuente de Poder Corsair RM750.jpg', 1);
 
-INSERT INTO Servicio (Nombre_S, Descripción_S, Precio_S, Categoría_S, Disponibilidad_S, Id_Administrador)  
-VALUES   
+INSERT INTO Servicio (Nombre_S, Descripción_S, Precio_S, Categoría_S, Disponibilidad_S, Id_Administrador)  VALUES   
 ('Reparación de hardware', 'Diagnóstico y reparación de componentes físicos dañados o defectuosos en equipos electrónicos.', 150, 'Mantenimiento', 1, 1),  
 ('Reparación de software', 'Resolución de errores y problemas en sistemas operativos, aplicaciones y programas.', 100, 'Mantenimiento', 1, 1),  
 ('Mantenimiento preventivo', 'Limpieza y optimización de hardware y software para garantizar un funcionamiento adecuado y prevenir fallos.', 80, 'Mantenimiento', 1, 1),  
@@ -98,15 +109,21 @@ VALUES
 ('Servicios de overclocking', 'Ajuste de componentes para aumentar su rendimiento de manera segura mediante overclocking.', 180, 'Optimización', 1, 1),  
 ('Análisis forense digital', 'Investigación y análisis de dispositivos para recopilar pruebas digitales en investigaciones legales o de ciberseguridad.', 350, 'Investigación', 1, 1),
 ('Soporte técnico remoto', 'Asistencia técnica para la resolución de problemas informáticos a través de conexión remota, sin necesidad de desplazamiento.', 90, 'Soporte Técnico', 1, 1),  
-('Evaluación de seguridad cibernética', 'Análisis completo de la infraestructura de seguridad de sistemas informáticos para identificar vulnerabilidades y riesgos de seguridad.', 300, 'Seguridad', 1, 1);
+('Evaluación de seguridad cibernética', 'Análisis completo de la infraestructura de seguridad de sistemas informáticos para identificar vulnerabilidades y riesgos de seguridad.', 300, 'Seguridad', 1, 1),
+('Configuración de redes', 'Instalación y configuración de redes LAN/WiFi para oficinas y hogares.', 250, 'Redes', 1, 1),  
+('Diseño de páginas web', 'Creación de sitios web personalizados según las necesidades del cliente.', 1000, 'Desarrollo Web', 1, 1),  
+('Ensamblado de PC a medida', 'Ensamble de equipos de escritorio según los requerimientos del cliente.', 300, 'Personalización', 1, 1),  
+('Optimización de rendimiento', 'Optimización de hardware y software para mejorar la velocidad y eficiencia.', 150, 'Optimización', 1, 1),  
+('Instalación de sistemas de vigilancia', 'Configuración de cámaras de seguridad y sistemas de monitoreo.', 500, 'Seguridad', 1, 1),  
+('Capacitación en herramientas tecnológicas', 'Cursos personalizados sobre software o herramientas tecnológicas.', 200, 'Educación', 1, 1),  
+('Auditoría de redes', 'Revisión completa de redes empresariales para identificar problemas o mejorar el rendimiento.', 350, 'Redes', 1, 1),  
+('Soporte técnico in situ', 'Asistencia técnica en el lugar para resolver problemas complejos.', 120, 'Soporte Técnico', 1, 1),  
+('Consultoría en ciberseguridad', 'Asesoramiento especializado en protección de datos y sistemas.', 400, 'Consultoría', 1, 1),  
+('Implementación de servidores', 'Configuración y despliegue de servidores para empresas.', 1000, 'Infraestructura', 1, 1);  
 
 select * from Administrador;
 select * from Usuario;
 select * from Producto;
 select * from Servicio;
-select * from Presupuesto;
-select * from Incluye;
-
-select * from Usuario;
 select * from Presupuesto;
 select * from Incluye;
