@@ -8,8 +8,8 @@ if (!isset($_SESSION['user_id'])) {
     exit();  
 }  
 
-// Consulta para obtener todos los productos  
-$query = "SELECT * FROM Producto WHERE Disponibilidad_P = 1"; // Solo productos en stock  
+// Consulta para obtener 12 productos al azar
+$query = "SELECT * FROM Producto WHERE Disponibilidad_P = 1 ORDER BY RAND() LIMIT 12";  
 $result = $conn->query($query);  
 $productos = [];  
 
@@ -24,16 +24,16 @@ if ($result->num_rows > 0) {
 $conn->close(); // Cierra la conexión a la base de datos  
 ?>  
 
-
 <!DOCTYPE html>  
 <html lang="es">  
 <head>  
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>Catálogo de productos</title>  
-    <link rel="stylesheet" href="css/Productos.css">  
+    <title>Página de Inicio</title>  
+    <link rel="stylesheet" href="css/Inicio.css">  
 </head>  
 <body>  
+
     <!-- Encabezado con logotipo y barra de búsqueda -->  
     <header>  
         <h1>Prepárate para Navidad este 2024</h1>  
@@ -68,34 +68,16 @@ $conn->close(); // Cierra la conexión a la base de datos
         <a href="Presupuesto.php">Presupuesto</a>  
     </nav>  
 
-    <section class="productos">  
+    <!-- Grid de productos -->
+    <div class="product-grid">
         <?php foreach ($productos as $producto): ?>  
-        <div class="producto">  
+        <div class="product-card">  
             <img src="<?php echo htmlspecialchars($producto['Imagen_P']); ?>" alt="<?php echo htmlspecialchars($producto['Nombre_P']); ?>">  
-            <h2><?php echo htmlspecialchars($producto['Nombre_P']); ?></h2>  
-            <p><strong>Precio:</strong> $<?php echo number_format($producto['Precio_P'], 2); ?></p>   
-            <button onclick="mostrarVentana(<?php echo $producto['Id_Producto']; ?>)">Ver más</button>  
+            <p class="product-title"><?php echo htmlspecialchars($producto['Nombre_P']); ?></p>  
+            <p class="product-price">$<?php echo number_format($producto['Precio_P'], 2); ?></p>  
         </div>  
         <?php endforeach; ?>  
-    </section>  
-
-    <!-- Ventana emergente -->  
-    <div id="ventanaEmergente" class="ventana">  
-        <div class="contenido">  
-            <span class="cerrar" onclick="cerrarVentana()">&times;</span>  
-            <img id="productoImagen" src="" alt="" style="max-width: 100%; height: auto;">  
-            <h2 id="productoTitulo"></h2>  
-            <p><strong>Descripción:</strong> <span id="productoDescripcion"></span></p>  
-            <p><strong>Precio:</strong> <span id="productoPrecio"></span></p>  
-            <p><strong>Categoría:</strong> <span id="productoCategoria"></span></p>  
-            <p><strong>Disponibilidad:</strong> <span id="productoDisponibilidad"></span></p>  
-            <button>Agregar al presupuesto</button>
-        </div>  
     </div>
 
-    <script>  
-        const productos = <?php echo json_encode($productos); ?>;  
-    </script>  
-    <script src="js/script_ventana.js"></script>
 </body>  
 </html>

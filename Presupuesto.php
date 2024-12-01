@@ -66,7 +66,7 @@ $productos = $stmt_productos->get_result()->fetch_all(MYSQLI_ASSOC);
             <a href="Perfil.php" class="logo-perfil">  
                 <img src="img/icono-perfil.png" alt="Perfil">Perfil  
             </a>  
-            <a href="Inicio.html">Inicio</a>  
+            <a href="Inicio.php">Inicio</a>  
             <a href="Información.html">Acerca de nosotros</a>  
             <a href="Productos.php">Productos</a>  
             <a href="Servicios.php">Servicios disponibles</a>  

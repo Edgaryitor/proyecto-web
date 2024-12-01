@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['phone'] = $row['Teléfono_U']; // Almacenar el número de teléfono  
             $_SESSION['birth_date'] = $row['Fecha_n_U']; // Almacenar la fecha de nacimiento  
             
-            header("Location: ../Inicio.html"); // Redirige al usuario  
+            header("Location: ../Inicio.php"); // Redirige al usuario  
             exit(); // Asegúrate de salir después de redirigir  
         } else {  
             $_SESSION['error'] = "Contraseña incorrecta";  
