@@ -1,114 +1,54 @@
-body {  
-    font-family: Arial, sans-serif;  
-    background-color: #f4f4f4;  
-    margin: 0;  
-    padding: 0;  
-}  
-
-/* Estilos del encabezado */
-header {
-    background-color: #424242; /* Fondo oscuro del encabezado */
-    padding: 10px; /* Espaciado interno del encabezado */
-    color: white; /* Color del texto en el encabezado */
-    text-align: center; /* Centra el texto dentro del encabezado */
-    position: relative; /* Posiciona el contenido del encabezado de manera relativa */
+.content {
+    padding: 20px;
+    background-color: #ffffff;
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-nav {
-    background-color: #424242;
-    color: white;
-    padding: 10px;
+h2 {
+    color: #37474F;
+}
+
+p {
+    color: #333;
+    line-height: 1.6;
+}
+
+.map {
+    width: 100%;
+    height: 300px;
+    background-color: #e0e0e0;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+    margin-top: 10px;
 }
 
-/* Estilos para los enlaces de navegación en el encabezado */
-nav a {
-    color: white;
+.map iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.link-map a {
+    color: #1a73e8;
     text-decoration: none;
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
 }
 
-/* Efecto hover para los enlaces de navegación */
-nav a:hover {
-    background-color: #0078d7; /* Cambia el fondo del enlace al pasar el cursor */
-    border-radius: 5px; /* Redondea los bordes del enlace al hacer hover */
+.link-map a:hover {
+    text-decoration: underline;
 }
-
-/* Estilos para la imagen de perfil dentro del encabezado */
-.logo-perfil img {
-    width: 24px; /* Ancho de la imagen de perfil */
-    height: 24px; /* Alto de la imagen de perfil */
-    margin-right: 8px; /* Margen derecho de la imagen para separarla del texto */
-}
-
-/* Estilos del contenedor principal de perfil */
-.profile-container {
-    max-width: 800px; /* Ancho máximo del contenedor */
-    margin: 40px auto; /* Centra el contenedor horizontalmente y da un margen vertical */
-    background-color: #333; /* Color de fondo oscuro para el contenedor */
-    color: white; /* Color del texto dentro del contenedor */
-    padding: 30px; /* Espaciado interno del contenedor */
-    border-radius: 10px; /* Bordes redondeados */
-    display: flex; /* Utiliza flexbox para alinear los elementos dentro */
-    justify-content: space-between; /* Espacia los elementos en el contenedor */
-    align-items: center; /* Alinea los elementos verticalmente al centro */
-}
-
-.content {  
-    padding: 20px;  
-    background-color: #ffffff;  
-    max-width: 800px;  
-    margin: 20px auto;  
-    border-radius: 8px;  
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
-}  
-
-h2 {  
-    color: #37474F;  
-}  
-
-p {  
-    color: #333;  
-    line-height: 1.6;  
-}  
-
-.map {  
-    width: 100%;  
-    height: 300px;  
-    background-color: #e0e0e0;  
-    display: flex;  
-    justify-content: center;  
-    align-items: center;  
-    margin-top: 10px;  
-}  
-
-.map iframe {  
-    width: 100%;  
-    height: 100%;  
-    border: 0;  
-}  
-
-.link-map a {  
-    color: #1a73e8;  
-    text-decoration: none;  
-}  
-
-.link-map a:hover {  
-    text-decoration: underline;  
-}  
 
 /* Estilos para el logo en la esquina inferior izquierda */
 .logo-container {
-    position: fixed; /* Fija el logo en una posición fija en la pantalla */
-    bottom: 10px; /* Posiciona el logo a 10px del fondo de la ventana */
-    left: 10px; /* Posiciona el logo a 10px de la izquierda de la ventana */
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
 }
 
 /* Estilos para la imagen del logo */
 .logo-container img {
-    width: 60px; /* Ancho del logo */
+    width: 60px;
 }

@@ -1,111 +1,4 @@
-/* Estilos generales */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-}
-
-/* Estilos del encabezado */
-header {
-    background-color: #0078d7;
-    padding: 10px;
-    color: white;
-    text-align: center;
-    position: relative;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 24px;
-}
-
-.logo {
-    position: absolute;
-    top: 10px;
-    left: 20px;
-}
-
-.logo img {
-    width: 80px;
-}
-
-/* Estilos de la barra de búsqueda */
-.search-bar {
-    background-color: #424242;
-    color: white;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0;
-}
-
-.search-bar .search-container {
-    display: flex;
-    justify-content: center;
-    flex-grow: 1;
-}
-
-.search-bar input[type="text"] {
-    padding: 10px;
-    width: 500px;
-    border-radius: 20px;
-    border: none;
-}
-
-.search-bar button {
-    padding: 10px;
-    margin-left: 10px;
-    background-color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 50%;
-}
-
-/* Mensaje a la derecha */
-.search-bar .message {
-    text-align: right;
-    color: white;
-    margin-left: auto;
-    margin-right: 10px;
-}
-
-/* Línea de separación */
-.linea-separadora {
-    width: 100%;
-    height: 1px;
-    background-color: #797979;
-}
-
-/* Estilos de la barra de navegación */
-nav {
-    background-color: #424242;
-    color: white;
-    padding: 10px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-}
-
-nav a:hover {
-    background-color: #0078d7;
-    border-radius: 5px;
-}
-
-.logo-perfil img {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-}
-
+/* Estilos para los productos */
 .productos {
     display: flex;
     flex-wrap: wrap;
@@ -141,78 +34,79 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Estilos para la ventana emergente */
-.ventana {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-}
-
-.contenido {
-    position: relative; /* Para que los elementos posicionados dentro estén relativos a este contenedor */
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    width: 300px;
-}
-
-.cerrar {
-    position: absolute;
-    top: 10px; /* Ajusta según tu preferencia */
-    right: 10px; /* Ajusta según tu preferencia */
-    font-size: 20px;
-    cursor: pointer;
-    background-color: transparent; /* Sin fondo para un diseño limpio */
-    border: none;
-    color: black;
-    font-weight: bold;
-}
-
 /* Estilos para la sección de filtros */
 .filtros {
-    background-color: #f4f4f4; /* Color de fondo para la sección de filtros */
-    padding: 20px; /* Espaciado interno para la sección de filtros */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra para la sección de filtros */
-    margin: 20px auto; /* Margen superior e inferior para separar la sección de filtros */
-    max-width: 1200px; /* Ancho máximo del contenedor */
-    display: flex; /* Utiliza flexbox para alinear los elementos dentro */
-    justify-content: space-between; /* Espacia los elementos en el contenedor */
-    align-items: center; /* Alinea los elementos verticalmente al centro */
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan en múltiples líneas */
-    gap: 10px; /* Espaciado entre los elementos */
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .filtros label {
-    font-weight: bold; /* Hace que las etiquetas tengan un peso de fuente más alto */
-    margin-right: 10px; /* Margen derecho para separar las etiquetas de los inputs */
+    font-weight: bold;
+    margin-right: 10px;
 }
 
 .filtros input[type="number"],
 .filtros select {
-    padding: 10px; /* Espaciado interno para los inputs y selects */
-    border-radius: 5px; /* Bordes redondeados */
-    border: 1px solid #ccc; /* Borde gris claro */
-    width: 150px; /* Ancho fijo para los inputs y selects */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 150px;
 }
 
 .filtros button {
-    background-color: #0078d7; /* Color de fondo del botón */
-    color: white; /* Color del texto del botón */
-    padding: 10px 20px; /* Espaciado interno del botón */
-    border: none; /* Elimina el borde del botón */
-    border-radius: 5px; /* Bordes redondeados */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    font-size: 14px; /* Tamaño de la fuente del botón */
+    background-color: #0078d7;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
 }
 
 .filtros button:hover {
-    background-color: #005bb5; /* Cambia el color de fondo al pasar el cursor */
+    background-color: #005bb5;
+}
+
+/* Media queries para ajustar el diseño en pantallas más pequeñas */
+@media (max-width: 768px) {
+    .productos {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .producto {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .filtros {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filtros label,
+    .filtros input[type="number"],
+    .filtros select,
+    .filtros button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .filtros input[type="number"],
+    .filtros select {
+        width: calc(100% - 20px);
+    }
+
+    .filtros button {
+        width: 100%;
+    }
 }

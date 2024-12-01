@@ -1,14 +1,14 @@
-<?php  
-session_start();  
-include 'funcionalidades_php/db.php';   
+<?php
+session_start();
+include 'funcionalidades_php/db.php';
 
 // Verifica si el ID de usuario está definido en la sesión  
-if (!isset($_SESSION['user_id'])) {  
-    echo "Por favor, inicia sesión para ver tu presupuesto.";  
+if (!isset($_SESSION['user_id'])) {
+    echo "Por favor, inicia sesión para ver tu presupuesto.";
     exit(); // Detener la ejecución si no hay usuario logueado  
-}  
+}
 
-$id_usuario = $_SESSION['user_id'];   
+$id_usuario = $_SESSION['user_id'];
 
 // Obtener el presupuesto del usuario  
 $sql = "  
@@ -20,18 +20,18 @@ $sql = "
     LEFT JOIN Producto prod ON inc.Id_Producto = prod.Id_Producto  
     WHERE p.Id_Usuario = ?   
     GROUP BY p.Id_Presupuesto  
-";  
+";
 
-$stmt = $conn->prepare($sql);  
-$stmt->bind_param("i", $id_usuario);  
-$stmt->execute();  
-$presupuesto = $stmt->get_result()->fetch_assoc();  
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id_usuario);
+$stmt->execute();
+$presupuesto = $stmt->get_result()->fetch_assoc();
 
 // Verifica si el presupuesto existe  
-if (!$presupuesto) {  
-    echo "<h1>No has generado un presupuesto aún.</h1>";  
-    exit();  
-}  
+if (!$presupuesto) {
+    echo "<h1>No has generado un presupuesto aún.</h1>";
+    exit();
+}
 
 // Obtener detalles de los productos en el presupuesto  
 $sql_productos = "  
@@ -42,104 +42,73 @@ $sql_productos = "
     FROM Incluye inc  
     JOIN Producto prod ON inc.Id_Producto = prod.Id_Producto  
     WHERE inc.Id_Presupuesto = ?  
-";  
+";
 
-$stmt_productos = $conn->prepare($sql_productos);  
-$stmt_productos->bind_param("i", $presupuesto['Id_Presupuesto']);  
-$stmt_productos->execute();  
-$productos = $stmt_productos->get_result()->fetch_all(MYSQLI_ASSOC);  
+$stmt_productos = $conn->prepare($sql_productos);
+$stmt_productos->bind_param("i", $presupuesto['Id_Presupuesto']);
+$stmt_productos->execute();
+$productos = $stmt_productos->get_result()->fetch_all(MYSQLI_ASSOC);
 
 $conn->close(); // Cierra la conexión a la base de datos
-?>  
+?>
 
-<!DOCTYPE html>  
-<html lang="es">  
-<head>  
-    <meta charset="UTF-8">  
-    <title>Presupuesto</title>  
-    <link rel="stylesheet" href="css/Presupuesto.css">  
-</head>  
-<body>  
+<!DOCTYPE html>
+<html lang="es">
 
-    <!-- Encabezado con navegación -->  
-    <header>  
-        <nav>  
-            <a href="Perfil.php" class="logo-perfil">  
-                <img src="img/icono-perfil.png" alt="Perfil">Perfil  
-            </a>  
-            <a href="Inicio.php">Inicio</a>  
-            <a href="Información.html">Acerca de nosotros</a>  
-            <a href="Productos.php">Productos</a>  
-            <a href="Servicios.php">Servicios disponibles</a>  
-            <a href="Presupuesto.php">Presupuesto</a>  
-        </nav>  
-    </header>  
+<head>
+    <meta charset="UTF-8">
+    <title>Presupuesto</title>
+    <link rel="stylesheet" href="css/Presupuesto.css">
+    <link rel="stylesheet" href="css/Navegación.css">
+</head>
 
-    <div class="content">  
-        <h1>Presupuesto</h1>  
-        <div class="presupuesto-info">  
-            <p>Productos (<?php echo htmlspecialchars($presupuesto['Cantidad']); ?>)</p>  
-            <p>Total: $<?php echo number_format($presupuesto['Total'], 2); ?></p>  
-        </div>  
+<body>
 
-        <div class="productos-lista">  
-            <?php if (empty($productos)): ?>  
-                <p>No tienes productos en tu presupuesto.</p>  
-            <?php else: ?>  
-                <?php foreach ($productos as $producto): ?>  
-                <div class="producto">  
-                    <img src="<?php echo htmlspecialchars($producto['Imagen_P']); ?>" alt="<?php echo htmlspecialchars($producto['Nombre_P']); ?>" style="max-width: 100px; height: auto;">  
-                    <h3><?php echo htmlspecialchars($producto['Nombre_P']); ?></h3>  
-                    <p>$<?php echo number_format($producto['Precio_P'], 2); ?></p>  
-                    <button class="quitar-btn" onclick="eliminarDelPresupuesto(<?php echo $producto['Id_Producto']; ?>)">Quitar</button>  
-                </div>  
-                <?php endforeach; ?>  
-            <?php endif; ?>  
-        </div>  
+    <!-- Encabezado con navegación -->
+    <header>
+        <nav>
+            <a href="Perfil.php" class="logo-perfil">
+                <img src="img/icono-perfil.png" alt="Perfil">Perfil
+            </a>
+            <a href="Inicio.php">Inicio</a>
+            <a href="Información.html">Acerca de nosotros</a>
+            <a href="Productos.php">Productos</a>
+            <a href="Servicios.php">Servicios disponibles</a>
+            <a href="Presupuesto.php">Presupuesto</a>
+        </nav>
+    </header>
+
+    <div class="content">
+        <h1>Presupuesto</h1>
+        <div class="presupuesto-info">
+            <p>Productos (<?php echo htmlspecialchars($presupuesto['Cantidad']); ?>)</p>
+            <p>Total: $<?php echo number_format($presupuesto['Total'], 2); ?></p>
+        </div>
+
+        <div class="productos-lista">
+            <?php if (empty($productos)): ?>
+                <p>No tienes productos en tu presupuesto.</p>
+            <?php else: ?>
+                <?php foreach ($productos as $producto): ?>
+                    <div class="producto">
+                        <img src="<?php echo htmlspecialchars($producto['Imagen_P']); ?>" alt="<?php echo htmlspecialchars($producto['Nombre_P']); ?>" style="max-width: 100px; height: auto;">
+                        <h3><?php echo htmlspecialchars($producto['Nombre_P']); ?></h3>
+                        <p>$<?php echo number_format($producto['Precio_P'], 2); ?></p>
+                        <button class="quitar-btn" onclick="eliminarDelPresupuesto(<?php echo $producto['Id_Producto']; ?>)">Quitar</button>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
 
         <button class="guardar-btn" onclick="guardarPresupuesto()">Guardar presupuesto</button>
-    </div>  
+    </div>
 
-    <!-- Logo en la esquina inferior izquierda -->  
-    <div class="logo-container">  
-        <img src="img/logo.png" alt="Logo">  
-    </div>  
+    <!-- Logo en la esquina inferior izquierda -->
+    <div class="logo-container">
+        <img src="img/logo.png" alt="Logo">
+    </div>
 
-    <script>
-        function eliminarDelPresupuesto(idProducto) {
-            // Crear una solicitud AJAX para enviar los datos al servidor
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "funcionalidades_php/eliminar_presupuesto.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    <script src="js/presupuesto.js"></script>
+</body>
 
-            // Manejar la respuesta del servidor
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    alert("Producto eliminado del presupuesto exitosamente!");
-                    location.reload(); // Recargar la página para actualizar la lista de productos
-                }
-            };
-
-            // Enviar los datos del producto al servidor
-            xhr.send("idProducto=" + idProducto);
-        }
-
-        function guardarPresupuesto() {
-            // Crear una solicitud AJAX para enviar los datos al servidor
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "funcionalidades_php/guardar_presupuesto.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-            // Manejar la respuesta del servidor
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    alert("Presupuesto guardado y notificación enviada!");
-                }
-            };
-
-            // Enviar la solicitud al servidor
-            xhr.send();
-        }
-    </script>
-</body>  
 </html>

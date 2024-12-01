@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de sesión</title>
     <link rel="stylesheet" href="css/Inicio de sesión.css">
-    <script>
-        // Función para mostrar notificaciones emergentes
-        function mostrarNotificacion(mensaje) {
-            alert(mensaje);
-        }
-    </script>
+    <script src="js/notificaciones.js"></script>
 </head>
+
 <body>
 
     <!-- Logotipo en la parte superior izquierda -->
@@ -23,18 +20,18 @@
     <div class="login-container">
         <h2>Bienvenido</h2>
 
-        <!-- Mostrar mensaje de registro exitoso -->  
-        <?php  
-        session_start();  
-        if (isset($_SESSION['message'])) {  
-            echo "<script>mostrarNotificacion('" . $_SESSION['message'] . "');</script>";  
+        <!-- Mostrar mensaje de registro exitoso -->
+        <?php
+        session_start();
+        if (isset($_SESSION['message'])) {
+            echo "<script>mostrarNotificacion('" . $_SESSION['message'] . "');</script>";
             unset($_SESSION['message']); // Limpiar el mensaje después de mostrarlo  
-        }  
-        if (isset($_SESSION['error'])) {  
-            echo "<script>mostrarNotificacion('" . $_SESSION['error'] . "');</script>";  
+        }
+        if (isset($_SESSION['error'])) {
+            echo "<script>mostrarNotificacion('" . $_SESSION['error'] . "');</script>";
             unset($_SESSION['error']); // Limpiar el mensaje después de mostrarlo  
-        }  
-        ?>  
+        }
+        ?>
 
         <!-- Formulario de inicio de sesión -->
         <form action="funcionalidades_php/login.php" method="POST">
@@ -55,4 +52,5 @@
     </div>
 
 </body>
+
 </html>

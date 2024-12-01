@@ -1,148 +1,131 @@
-/* Estilos generales de la página */
-body {
-    margin: 0; /* Elimina los márgenes por defecto del body */
-    font-family: Arial, sans-serif; /* Establece la fuente de texto */
-    background-color: #f4f4f4; /* Color de fondo de la página */
-}
-
-/* Estilos del encabezado */
-header {
-    background-color: #424242; /* Fondo oscuro del encabezado */
-    padding: 10px; /* Espaciado interno del encabezado */
-    color: white; /* Color del texto en el encabezado */
-    text-align: center; /* Centra el texto dentro del encabezado */
-    position: relative; /* Posiciona el contenido del encabezado de manera relativa */
-}
-
-nav {
-    background-color: #424242;
-    color: white;
-    padding: 10px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-/* Estilos para los enlaces de navegación en el encabezado */
-nav a {
-    color: white;
-    text-decoration: none;
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-}
-
-/* Efecto hover para los enlaces de navegación */
-nav a:hover {
-    background-color: #0078d7; /* Cambia el fondo del enlace al pasar el cursor */
-    border-radius: 5px; /* Redondea los bordes del enlace al hacer hover */
-}
-
-/* Estilos para la imagen de perfil dentro del encabezado */
-.logo-perfil img {
-    width: 24px; /* Ancho de la imagen de perfil */
-    height: 24px; /* Alto de la imagen de perfil */
-    margin-right: 8px; /* Margen derecho de la imagen para separarla del texto */
-}
-
 /* Estilos del contenedor principal de perfil */
 .profile-container {
-    max-width: 800px; /* Ancho máximo del contenedor */
-    margin: 40px auto; /* Centra el contenedor horizontalmente y da un margen vertical */
-    background-color: #333; /* Color de fondo oscuro para el contenedor */
-    color: white; /* Color del texto dentro del contenedor */
-    padding: 30px; /* Espaciado interno del contenedor */
-    border-radius: 10px; /* Bordes redondeados */
-    display: flex; /* Utiliza flexbox para alinear los elementos dentro */
-    justify-content: space-between; /* Espacia los elementos en el contenedor */
-    align-items: center; /* Alinea los elementos verticalmente al centro */
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: #333;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* Estilos del formulario de perfil */
 .profile-form {
-    width: 60%; /* Establece el ancho del formulario */
+    width: 60%;
 }
 
 /* Estilos para las etiquetas del formulario */
 .profile-form label {
-    display: block; /* Muestra las etiquetas como bloques */
-    margin: 10px 0 5px; /* Margen superior e inferior entre las etiquetas y los inputs */
-    font-weight: bold; /* Hace que las etiquetas tengan un peso de fuente más alto */
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
 }
 
 /* Estilos para los campos de entrada (inputs) del formulario */
 .profile-form input {
-    width: 100%; /* Hace que los inputs ocupen todo el ancho disponible */
-    padding: 10px; /* Espaciado interno de los inputs */
-    margin-bottom: 15px; /* Margen inferior para separar los inputs */
-    border-radius: 5px; /* Bordes redondeados en los inputs */
-    border: 1px solid #ccc; /* Borde gris claro en los inputs */
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
 /* Estilos para los campos de solo lectura */
 .profile-form .readonly {
-    background-color: #555; /* Fondo gris oscuro para los campos de solo lectura */
-    color: #999; /* Color gris claro para el texto */
-    border: none; /* Elimina el borde de los campos de solo lectura */
-    cursor: not-allowed; /* Cursor que indica que no se puede interactuar con el campo */
+    background-color: #555;
+    color: #999;
+    border: none;
+    cursor: not-allowed;
 }
 
 /* Estilos para la sección de la foto de perfil */
 .profile-photo {
-    text-align: center; /* Centra el contenido de la sección de la foto */
+    text-align: center;
 }
 
 /* Estilos para la imagen de perfil */
 .profile-photo img {
-    width: 180px; /* Ancho de la imagen de perfil */
-    height: 180px; /* Alto de la imagen de perfil */
-    border-radius: 50%; /* Hace que la imagen tenga forma circular */
-    margin-bottom: 10px; /* Margen inferior para separar la imagen del botón */
-    display: block; /* Muestra la imagen como un bloque */
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    display: block;
 }
 
 /* Estilos para el botón de cambiar foto */
 .change-photo-btn {
-    background-color: #0078d7; /* Color de fondo del botón */
-    border: none; /* Elimina el borde del botón */
-    padding: 8px 15px; /* Espaciado interno del botón */
-    color: white; /* Color del texto del botón */
-    border-radius: 5px; /* Bordes redondeados del botón */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    display: block; /* Muestra el botón como un bloque */
-    margin: 10px auto; /* Centra el botón horizontalmente y agrega margen superior */
+    background-color: #0078d7;
+    border: none;
+    padding: 8px 15px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 10px auto;
 }
 
 /* Estilos del botón de confirmación */
 .confirm-btn {
-    background-color: #0078d7; /* Color de fondo del botón de confirmación */
-    color: white; /* Color del texto */
-    padding: 10px 20px; /* Espaciado interno del botón */
-    border: none; /* Elimina el borde del botón */
-    border-radius: 5px; /* Bordes redondeados */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    font-size: 16px; /* Tamaño de la fuente del botón */
+    background-color: #0078d7;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 /* Efecto hover para el botón de confirmación */
 .confirm-btn:hover {
-    background-color: #005bb5; /* Cambia el color de fondo al pasar el cursor */
+    background-color: #005bb5;
 }
 
 /* Estilos para la nota explicativa */
 .note {
-    color: #ff5a5a; /* Color rojo para la nota */
-    font-size: 12px; /* Tamaño de la fuente de la nota */
+    color: #ff5a5a;
+    font-size: 12px;
 }
 
 /* Estilos para el logo en la esquina inferior izquierda */
 .logo-container {
-    position: fixed; /* Fija el logo en una posición fija en la pantalla */
-    bottom: 10px; /* Posiciona el logo a 10px del fondo de la ventana */
-    left: 10px; /* Posiciona el logo a 10px de la izquierda de la ventana */
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
 }
 
 /* Estilos para la imagen del logo */
 .logo-container img {
-    width: 60px; /* Ancho del logo */
+    width: 60px;
+}
+
+/* Media queries para ajustar el diseño en pantallas más pequeñas */
+@media (max-width: 768px) {
+    .profile-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profile-form {
+        width: 100%;
+    }
+
+    .profile-photo {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .profile-photo img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .change-photo-btn {
+        width: 100%;
+    }
+
+    .confirm-btn {
+        width: 100%;
+    }
 }

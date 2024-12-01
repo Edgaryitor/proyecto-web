@@ -27,7 +27,7 @@ body {
 }
 
 .logo img {
-    width: 80px; /* Ajusta el tamaño de la imagen del logo */
+    width: 80px;
 }
 
 /* Estilos para el título */
@@ -37,7 +37,10 @@ h2 {
 }
 
 /* Estilos para los campos de entrada */
-input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
     width: 90%;
     padding: 10px;
     margin: 10px 0;
