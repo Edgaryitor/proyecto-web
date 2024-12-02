@@ -13,12 +13,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_product'])) {
     $precio = $_POST['precio'];
     $categoria = $_POST['categoria'];
     $disponibilidad = isset($_POST['disponibilidad']) ? 1 : 0;
-    $imagen = $_POST['imagen'];
 
-    $stmt = $conn->prepare("INSERT INTO Producto (Nombre_P, Descripción_P, Precio_P, Categoría_P, Disponibilidad_P, Imagen_P, Id_Administrador) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssdsisi", $nombre, $descripcion, $precio, $categoria, $disponibilidad, $imagen, $_SESSION['admin_id']);
-    $stmt->execute();
-    $stmt->close();
+    // Manejar la subida de la imagen
+    $target_dir = "../uploads/";
+    $target_file = $target_dir . basename($_FILES["imagen"]["name"]);
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    $new_filename = $target_dir . $nombre . ".jpg";
+
+    // Verificar si el archivo es una imagen real
+    $check = getimagesize($_FILES["imagen"]["tmp_name"]);
+    if ($check !== false) {
+        if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $new_filename)) {
+            $imagen = "uploads/" . $nombre . ".jpg";
+
+            $stmt = $conn->prepare("INSERT INTO Producto (Nombre_P, Descripción_P, Precio_P, Categoría_P, Disponibilidad_P, Imagen_P, Id_Administrador) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssdsisi", $nombre, $descripcion, $precio, $categoria, $disponibilidad, $imagen, $_SESSION['admin_id']);
+            $stmt->execute();
+            $stmt->close();
+        } else {
+            echo "Error al subir la imagen.";
+        }
+    } else {
+        echo "El archivo no es una imagen.";
+    }
 }
 
 // Lógica para eliminar productos
@@ -38,12 +55,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_product'])) {
     $precio = $_POST['precio'];
     $categoria = $_POST['categoria'];
     $disponibilidad = isset($_POST['disponibilidad']) ? 1 : 0;
-    $imagen = $_POST['imagen'];
 
-    $stmt = $conn->prepare("UPDATE Producto SET Nombre_P = ?, Descripción_P = ?, Precio_P = ?, Categoría_P = ?, Disponibilidad_P = ?, Imagen_P = ? WHERE Id_Producto = ?");
-    $stmt->bind_param("ssdsisi", $nombre, $descripcion, $precio, $categoria, $disponibilidad, $imagen, $id_producto);
-    $stmt->execute();
-    $stmt->close();
+    // Manejar la subida de la imagen
+    $target_dir = "../uploads/";
+    $target_file = $target_dir . basename($_FILES["imagen"]["name"]);
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    $new_filename = $target_dir . $nombre . ".jpg";
+
+    // Verificar si el archivo es una imagen real
+    $check = getimagesize($_FILES["imagen"]["tmp_name"]);
+    if ($check !== false) {
+        if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $new_filename)) {
+            $imagen = "uploads/" . $nombre . ".jpg";
+
+            $stmt = $conn->prepare("UPDATE Producto SET Nombre_P = ?, Descripción_P = ?, Precio_P = ?, Categoría_P = ?, Disponibilidad_P = ?, Imagen_P = ? WHERE Id_Producto = ?");
+            $stmt->bind_param("ssdsisi", $nombre, $descripcion, $precio, $categoria, $disponibilidad, $imagen, $id_producto);
+            $stmt->execute();
+            $stmt->close();
+        } else {
+            echo "Error al subir la imagen.";
+        }
+    } else {
+        echo "El archivo no es una imagen.";
+    }
 }
 
 // Consultar productos
@@ -81,7 +115,7 @@ $conn->close();
         <h2>Productos</h2>
 
         <!-- Formulario para añadir productos -->
-        <form action="gestionar_productos.php" method="POST">
+        <form action="gestionar_productos.php" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="add_product" value="1">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
@@ -93,8 +127,8 @@ $conn->close();
             <input type="text" id="categoria" name="categoria" required>
             <label for="disponibilidad">Disponibilidad:</label>
             <input type="checkbox" id="disponibilidad" name="disponibilidad">
-            <label for="imagen">URL de la Imagen:</label>
-            <input type="text" id="imagen" name="imagen" required>
+            <label for="imagen">Imagen:</label>
+            <input type="file" id="imagen" name="imagen" required>
             <button type="submit">Añadir Producto</button>
         </form>
 
