@@ -18,6 +18,7 @@ CREATE TABLE Administrador (
     Id_Administrador INT AUTO_INCREMENT PRIMARY KEY,
     Nombre_A VARCHAR(100) NOT NULL,
     Correo_e_A VARCHAR(100) NOT NULL UNIQUE,
+    Contraseña_A VARCHAR(255) NOT NULL,
     Permisos_A VARCHAR(50) NOT NULL
 );
 
@@ -64,8 +65,10 @@ CREATE TABLE Incluye (
     FOREIGN KEY (Id_Presupuesto) REFERENCES Presupuesto(Id_Presupuesto),
     FOREIGN KEY (Id_Producto) REFERENCES Producto(Id_Producto)
 );
-INSERT INTO Administrador (Nombre_A, Correo_e_A, Permisos_A) VALUES  
-('Administrador', 'admin@gmail.com', 'admin');
+
+INSERT INTO Administrador (Nombre_A, Correo_e_A, Contraseña_A, Permisos_A) VALUES  
+('Administrador', 'admin@gmail.com', '$2y$10$ao3O6n2kMM./r3N3EeQBFuoBwElmvsmZDkTY6mFYTK6IQDJX0lssu', 'admin');
+-- Contraseña 1234Segura hasheada
 
 INSERT INTO Producto (Nombre_P, Descripción_P, Precio_P, Categoría_P, Disponibilidad_P, Imagen_P, Id_Administrador) VALUES  
 ('Laptop HP 240 G9', 'Laptop con procesador Intel Celeron, 8GB RAM y 256GB SSD.', 5299.00, 'Computadoras Portátiles', 1, 'img/Laptop HP 240 G9.jpg', 1),  
