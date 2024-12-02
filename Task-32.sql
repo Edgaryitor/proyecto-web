@@ -70,6 +70,10 @@ INSERT INTO Administrador (Nombre_A, Correo_e_A, Contraseña_A, Permisos_A) VALU
 ('Administrador', 'admin@gmail.com', '$2y$10$ao3O6n2kMM./r3N3EeQBFuoBwElmvsmZDkTY6mFYTK6IQDJX0lssu', 'admin');
 -- Contraseña 1234Segura hasheada
 
+INSERT INTO Administrador (Nombre_A, Correo_e_A, Contraseña_A, Permisos_A) VALUES  
+('Edgar', 'edgar@gmail.com', '$2y$10$HpKAsfgUHhisIMm/4DDiUOrhw8Uz1vORX0D9DbSPqTNT/TQDUQ/Bu', 'admin');
+-- Contraseña contra hasheada
+
 INSERT INTO Producto (Nombre_P, Descripción_P, Precio_P, Categoría_P, Disponibilidad_P, Imagen_P, Id_Administrador) VALUES  
 ('Laptop HP 240 G9', 'Laptop con procesador Intel Celeron, 8GB RAM y 256GB SSD.', 5299.00, 'Computadoras Portátiles', 1, 'img/Laptop HP 240 G9.jpg', 1),  
 ('Laptop Dell XPS 13', 'Laptop premium con Intel i7, 16GB RAM y 512GB SSD.', 9999.00, 'Computadoras Portátiles', 1, 'img/Laptop Dell XPS 13.jpg', 1),  
